@@ -1,0 +1,45 @@
+GET http://localhost:3000/abc
+
+###
+GET http://localhost:3000/recipes
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWVkYWFmYjE0NGFhZTEyODgzMzM2Yzc2In0sImlhdCI6MTU5MTM5MTg4MCwiZXhwIjoxNTkxMzk1NDgwfQ.yTCbV_X8zacPoQ7RwxrclmmIQtJWa40nOnJoKErr-_w
+
+###
+GET http://localhost:3000/recipes/5ebb0eae5339f53b22998b2e
+
+###
+POST  http://localhost:3000/recipes
+Content-Type: application/json
+
+{
+  "title": "New Recipe",
+  "desc": "New recipe desc",
+  "ingredients": ["🐱‍👤","😁","😘"]
+}
+
+####
+//AUTH
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "diesel.saurav@gmail.com",
+  "password": "123456"
+}
+
+
+####
+//AUTH
+POST http://localhost:3000/signUp
+Content-Type: application/json
+
+{
+  "username": "Kumar Saurav",
+  "email": "diesel.saurav@gmail.com",
+  "password": "123456"
+}
+
+####
+//AUTH
+GET http://localhost:3000/me
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWVkYWFmYjE0NGFhZTEyODgzMzM2Yzc2In0sImlhdCI6MTU5MTU0Nzg0OSwiZXhwIjoxNTkxNTUxNDQ5fQ.4GMCtjAVwDSJLGIHpUw9RhGxCPyoGxcKuBJiaBLQpF0
