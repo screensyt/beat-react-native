@@ -1,0 +1,26 @@
+####
+//AUTH
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "diesel.saurav@gmail.com",
+  "password": "123456"
+}
+
+
+####
+//AUTH
+POST http://localhost:3000/signUp
+Content-Type: application/json
+
+{
+  "username": "Kumar Saurav",
+  "email": "randomuser@gmail.com",
+  "password": "123456"
+}
+
+####
+//AUTH
+GET http://localhost:3000/me
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWVkYWFmYjE0NGFhZTEyODgzMzM2Yzc2In0sImlhdCI6MTU5MTU1MTI0MSwiZXhwIjoxNTkxNTU0ODQxfQ.shf5BGrEfhlheAh-8EnqDhA7Q0Yh6AKx_E59YwG48N0
