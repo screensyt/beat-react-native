@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 import TextInput from '../components/TextInput';
 import AuthContext from '../AuthContext';
+import Logo from '../../assets/svg/logo.svg';
 
 const Container = styled.View`
   flex: 1;
@@ -16,26 +17,32 @@ const Title = styled.Text`
 `;
 const Content = styled.View`
   flex: 1;
-  padding: 20% 16px 0 16px;
+  padding: 0 16px;
 `;
 
 const TochableOpacity = styled.TouchableOpacity`
-  background: #2ec4b6;
+  background: #66e0f7;
   align-items: center;
   justify-content: center;
   margin: 16px 0;
-  height: 40px;
-  border-radius: 3px;
+  height: 48px;
+  border-radius: 8px;
 `;
 
 const ButtonText = styled.Text`
-  font-size: 16px;
-  color: #fdfffc;
+  font-size: 20px;
+  color: #011627;
+  font-weight: 500;
 `;
 
 const Label = styled.Text`
-  font-size: 16px;
+  font-size: 20px;
   margin: 8px 0 4px 0;
+`;
+
+const LogoContainer = styled.View`
+  align-items: center;
+  margin: 36px 0;
 `;
 
 function Login({navigation}) {
@@ -48,11 +55,14 @@ function Login({navigation}) {
     <Container>
       <Title>Login</Title>
       <Content>
+        <LogoContainer>
+          <Logo height={120} width={120} fill="#011627" />
+        </LogoContainer>
         <Label>Email</Label>
         <TextInput
           placeholder="email"
           value={email}
-          onChangeText={(text) => {
+          onChangeText={text => {
             setEmail(text);
           }}
         />
@@ -61,7 +71,7 @@ function Login({navigation}) {
           placeholder="password"
           secureTextEntry={true}
           value={password}
-          onChangeText={(text) => {
+          onChangeText={text => {
             setPassword(text);
           }}
         />

@@ -9,12 +9,18 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 
 // logged in
-import Home from './screens/Home';
+import Recipes from './screens/Recipes';
 import Profile from './screens/Profile';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import AuthContext from './AuthContext';
 import Loading from './screens/Loading';
+
+//icons
+import RecipesIcon from '../assets/svg/recipes.svg';
+import RecipesActiveIcon from '../assets/svg/recipes-active.svg';
+import ProfileIcon from '../assets/svg/profile.svg';
+import ProfileActiveIcon from '../assets/svg/profile-active.svg';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,7 +71,6 @@ function App() {
       let userToken;
       try {
         userToken = await AsyncStorage.getItem('token');
-        console.log('Effect', userToken);
       } catch (e) {
         // error fetching token
       }
@@ -121,8 +126,40 @@ function App() {
             <Stack.Screen name="Register" component={Register} />
           </Stack.Navigator>
         ) : (
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
+          <Tab.Navigator
+            screenOptions={({route}) => ({
+              tabBarIcon: ({focused, color, size}) => {
+                switch (route.name) {
+                  case 'Recipes':
+                    return focused ? (
+                      <RecipesActiveIcon height={size} width={size} />
+                    ) : (
+                      <RecipesIcon height={size} width={size} fill="gray" />
+                    );
+                  case 'Profile':
+                    return focused ? (
+                      <ProfileActiveIcon
+                        height={size}
+                        width={size}
+                        fill="black"
+                      />
+                    ) : (
+                      <ProfileIcon height={size} width={size} fill="gray" />
+                    );
+                  default:
+                    return null;
+                }
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: 'tomato',
+              inactiveTintColor: 'gray',
+              showLabel: false,
+              style: {
+                backgroundColor: '#011627', // TabBar background
+              },
+            }}>
+            <Tab.Screen name="Recipes" component={Recipes} />
             <Tab.Screen name="Profile" component={Profile} />
           </Tab.Navigator>
         )}

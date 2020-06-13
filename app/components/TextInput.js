@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const StyledTextInput = styled.TextInput`
-  border: 1px #011627;
-  border-radius: 3px;
-  font-size: 16px;
-  height: 40px;
+  border: 2px #011627;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 48px;
 `;
 
 function TextInput(props) {
