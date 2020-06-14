@@ -2,33 +2,30 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import AuthContext from '../AuthContext';
+import RecipeItem from '../components/RecipeItem';
+import FetchData from '../FetchData';
+import {getRecipes} from '../api';
 
 const Container = styled.View``;
 const Text = styled.Text``;
 
-const TochableOpacity = styled.TouchableOpacity`
-  background: #2ec4b6;
-  align-items: center;
-  justify-content: center;
-  margin: 16px 0;
-  height: 40px;
-  border-radius: 3px;
-`;
-
-const ButtonText = styled.Text`
-  font-size: 16px;
-  color: #fdfffc;
-`;
+const FlatList = styled.FlatList``;
 
 function Home() {
-  const {signOut} = React.useContext(AuthContext);
+  const {userToken} = React.useContext(AuthContext);
 
   return (
     <Container>
       <Text>Home</Text>
-      <TochableOpacity onPress={() => signOut()}>
-        <ButtonText>Logout</ButtonText>
-      </TochableOpacity>
+      <FetchData action={getRecipes(userToken)}>
+        {data => (
+          <FlatList
+            data={data}
+            renderItem={({item}) => <RecipeItem {...item} />}
+            keyExtractor={item => item.id}
+          />
+        )}
+      </FetchData>
     </Container>
   );
 }
