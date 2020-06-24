@@ -4,6 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import {ThemeProvider} from 'styled-components';
+
 // logged out
 import Login from './screens/Login';
 import Register from './screens/Register';
@@ -15,6 +17,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import AuthContext from './AuthContext';
 import Loading from './screens/Loading';
+
+import HomeIcon from './assets/svg/home.svg';
+import ProfileIcon from './assets/svg/profile.svg';
+import theme from './theme';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,8 +63,6 @@ const reducer = (prevState, action) => {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initalState);
-
-  console.log('State', state);
 
   React.useEffect(() => {
     const bootstrapAsync = async () => {
@@ -113,21 +117,36 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <AuthContext.Provider value={authContext}>
-        {!state.isLoggedIn ? (
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-          </Stack.Navigator>
-        ) : (
-          <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Profile" component={Profile} />
-          </Tab.Navigator>
-        )}
-      </AuthContext.Provider>
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <AuthContext.Provider value={authContext}>
+          {!state.isLoggedIn ? (
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Register" component={Register} />
+            </Stack.Navigator>
+          ) : (
+            <Tab.Navigator
+              screenOptions={({route}) => ({
+                tabBarIcon: ({focused, color, size}) => {
+                  if (route.name === 'Home') {
+                    return <HomeIcon size={size} fill={color} />;
+                  } else if (route.name === 'Profile') {
+                    return <ProfileIcon size={size} fill={color} />;
+                  }
+                },
+              })}
+              tabBarOptions={{
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+              }}>
+              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="Profile" component={Profile} />
+            </Tab.Navigator>
+          )}
+        </AuthContext.Provider>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

@@ -9,7 +9,7 @@ const Container = styled.View``;
 const Text = styled.Text``;
 
 const TochableOpacity = styled.TouchableOpacity`
-  background: #2ec4b6;
+  background: ${props => props.theme.colors.primaryDark};
   align-items: center;
   justify-content: center;
   margin: 16px 0;
