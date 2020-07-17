@@ -10,32 +10,45 @@ const Container = styled.View`
   justify-content: center;
 `;
 const Title = styled.Text`
-  font-size: 36px;
+  font-size: 54px;
   color: #011627;
-  padding: 4px 16px;
+  padding: 54px 16px 0 16px;
+  text-align: center;
+  font-family: 'SourceCodePro-BoldItalic';
 `;
+
+const SubTitle = styled.Text`
+  font-size: 16px;
+  color: #011627;
+  padding: 0px 16px 54px 16px;
+  text-align: center;
+  font-family: 'SourceCodePro-Regular';
+`;
+
 const Content = styled.View`
   flex: 1;
-  padding: 20% 16px 0 16px;
+  padding: 0 16px;
 `;
 
 const TochableOpacity = styled.TouchableOpacity`
-  background: #2ec4b6;
+  background: #e71d36;
   align-items: center;
   justify-content: center;
   margin: 16px 0;
-  height: 40px;
-  border-radius: 3px;
+  height: 48px;
+  border-radius: 24px;
 `;
 
 const ButtonText = styled.Text`
-  font-size: 16px;
+  font-size: 20px;
   color: #fdfffc;
+  font-family: 'SourceCodePro-Regular';
 `;
 
 const Label = styled.Text`
   font-size: 16px;
   margin: 8px 0 4px 0;
+  font-family: 'SourceCodePro-Regular';
 `;
 
 function Login({navigation}) {
@@ -46,13 +59,14 @@ function Login({navigation}) {
 
   return (
     <Container>
-      <Title>Login</Title>
+      <Title>foodgram</Title>
+      <SubTitle>a perfect place to share recipes</SubTitle>
       <Content>
         <Label>Email</Label>
         <TextInput
           placeholder="email"
           value={email}
-          onChangeText={(text) => {
+          onChangeText={text => {
             setEmail(text);
           }}
         />
@@ -61,7 +75,7 @@ function Login({navigation}) {
           placeholder="password"
           secureTextEntry={true}
           value={password}
-          onChangeText={(text) => {
+          onChangeText={text => {
             setPassword(text);
           }}
         />
