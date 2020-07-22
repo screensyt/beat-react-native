@@ -7,7 +7,6 @@ import FetchData from '../FetchData';
 import {getRecipes} from '../api';
 
 const Container = styled.View``;
-const Text = styled.Text``;
 
 const FlatList = styled.FlatList``;
 
@@ -16,7 +15,6 @@ function Home() {
 
   return (
     <Container>
-      <Text>Home</Text>
       <FetchData action={getRecipes(userToken)}>
         {data => (
           <FlatList
