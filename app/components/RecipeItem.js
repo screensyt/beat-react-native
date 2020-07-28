@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   margin: 8px;
   background: white;
   border-radius: 8px;
 `;
 const CoverImage = styled.Image`
-  height: 200px;
+  height: 100px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 `;
@@ -29,9 +29,9 @@ const Ing = styled.Text`
   margin: 4px 8px;
 `;
 
-function RecipeItem({title, desc, ingredients, coverImage, _id}) {
+function RecipeItem({title, desc, ingredients, coverImage, _id, onItemClick}) {
   return (
-    <Container>
+    <Container onPress={() => onItemClick(_id)}>
       <CoverImage source={{uri: coverImage}} />
       <Title>{title}</Title>
       <Desc>{desc}</Desc>
