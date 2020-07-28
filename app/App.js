@@ -12,6 +12,7 @@ import Register from './screens/Register';
 
 // logged in
 import Home from './screens/Home';
+import RecipeDetails from './screens/RecipeDetails';
 import Profile from './screens/Profile';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -116,6 +117,17 @@ function App() {
     return <Loading />;
   }
 
+  const HomeStack = createStackNavigator();
+
+  function HomeStackScreen() {
+    return (
+      <HomeStack.Navigator>
+        <HomeStack.Screen name="Home" component={Home} />
+        <HomeStack.Screen name="Recipe Details" component={RecipeDetails} />
+      </HomeStack.Navigator>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
@@ -140,7 +152,7 @@ function App() {
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
               }}>
-              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="Home" component={HomeStackScreen} />
               <Tab.Screen name="Profile" component={Profile} />
             </Tab.Navigator>
           )}

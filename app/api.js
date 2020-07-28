@@ -22,8 +22,29 @@ export const getProfile = token => async () => {
   return jsonData;
 };
 
-export const getRecipes = token => async () => {
-  const response = await fetch(`${BASE_URL}recipes`, {
+export const getRecipe = (token, id) => async () => {
+  const response = await fetch(`${BASE_URL}recipes/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      token: token,
+    },
+  });
+
+  console.log(response);
+  if (!response.ok) {
+    throw new HttpError({
+      message: response.statusText,
+      statusCode: response.status,
+    });
+  }
+
+  const jsonData = await response.json();
+  return jsonData;
+};
+
+export async function getRecipes(token, page) {
+  const response = await fetch(`${BASE_URL}recipes?page=${page}&limit=10`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -40,5 +61,6 @@ export const getRecipes = token => async () => {
   }
 
   const jsonData = await response.json();
+  console.log(jsonData);
   return jsonData;
-};
+}
