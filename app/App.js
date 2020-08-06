@@ -22,6 +22,9 @@ import Loading from './screens/Loading';
 import HomeIcon from './assets/svg/home.svg';
 import ProfileIcon from './assets/svg/profile.svg';
 import theme from './theme';
+import AddRecipe from './screens/AddRecipe';
+
+import AddRecipeButton from './components/AddRecipeButton';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -139,21 +142,37 @@ function App() {
             </Stack.Navigator>
           ) : (
             <Tab.Navigator
-              screenOptions={({route}) => ({
-                tabBarIcon: ({focused, color, size}) => {
-                  if (route.name === 'Home') {
-                    return <HomeIcon size={size} fill={color} />;
-                  } else if (route.name === 'Profile') {
-                    return <ProfileIcon size={size} fill={color} />;
-                  }
-                },
-              })}
               tabBarOptions={{
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
+                style: {height: 50},
               }}>
-              <Tab.Screen name="Home" component={HomeStackScreen} />
-              <Tab.Screen name="Profile" component={Profile} />
+              <Tab.Screen
+                name="Home"
+                component={HomeStackScreen}
+                options={{
+                  tabBarIcon: ({color, size, focused}) => (
+                    <HomeIcon fill={color} width={size} height={size} />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Add Recipe"
+                component={AddRecipe}
+                options={{
+                  tabBarLabel: '',
+                  tabBarIcon: ({color, size, focused}) => <AddRecipeButton />,
+                }}
+              />
+              <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                  tabBarIcon: ({color, size, focused}) => (
+                    <ProfileIcon fill={color} width={size} height={size} />
+                  ),
+                }}
+              />
             </Tab.Navigator>
           )}
         </AuthContext.Provider>
