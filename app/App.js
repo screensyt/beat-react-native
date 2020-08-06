@@ -14,6 +14,8 @@ import Register from './screens/Register';
 import Home from './screens/Home';
 import RecipeDetails from './screens/RecipeDetails';
 import Profile from './screens/Profile';
+import AddRecipe from './screens/AddRecipe';
+
 import AsyncStorage from '@react-native-community/async-storage';
 
 import AuthContext from './AuthContext';
@@ -22,6 +24,8 @@ import Loading from './screens/Loading';
 import HomeIcon from './assets/svg/home.svg';
 import ProfileIcon from './assets/svg/profile.svg';
 import theme from './theme';
+
+import AddRecipeButton from './components/AddRecipeButton';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -139,21 +143,38 @@ function App() {
             </Stack.Navigator>
           ) : (
             <Tab.Navigator
-              screenOptions={({route}) => ({
-                tabBarIcon: ({focused, color, size}) => {
-                  if (route.name === 'Home') {
-                    return <HomeIcon size={size} fill={color} />;
-                  } else if (route.name === 'Profile') {
-                    return <ProfileIcon size={size} fill={color} />;
-                  }
-                },
-              })}
               tabBarOptions={{
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
+                tabStyle: {paddingTop: 5},
+                style: {height: 50},
               }}>
-              <Tab.Screen name="Home" component={HomeStackScreen} />
-              <Tab.Screen name="Profile" component={Profile} />
+              <Tab.Screen
+                name="Home"
+                component={HomeStackScreen}
+                options={{
+                  tabBarIcon: ({size, color}) => (
+                    <HomeIcon height={24} width={24} fill={color} />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="AddRecipe"
+                component={AddRecipe}
+                options={{
+                  tabBarLabel: '',
+                  tabBarIcon: () => <AddRecipeButton />,
+                }}
+              />
+              <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                  tabBarIcon: ({size, color}) => (
+                    <ProfileIcon height={24} width={24} fill={color} />
+                  ),
+                }}
+              />
             </Tab.Navigator>
           )}
         </AuthContext.Provider>
